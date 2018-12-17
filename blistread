@@ -1,0 +1,17 @@
+#!/bin/sh
+
+IFS="
+"
+music=$(blistdb -m)
+for playlist in $(blistdb -p $@); do
+	while read -r line; do
+		for song in $music; do
+			case "$song" in
+				*$line*)
+					echo "$song"
+					break
+			esac
+		done
+	done <"$playlist"
+done
+exit 0

@@ -1,0 +1,29 @@
+#!/bin/sh
+# blistdb: query the music and playlist directories
+
+# Read the config file to set the MUSICDIR and PLAYLISTDIR variabes
+config="$HOME/.config/blist/config"
+[ -r "$config" ] && . "$config"
+
+case "$1" in
+	-m)
+		db="$MUSICDIR"
+		dbavoid="$PLAYLISTDIR"
+		;;
+	-p)
+		db="$PLAYLISTDIR"
+		dbavoid="$MUSICDIR"
+		;;
+	*)
+		exit 1
+esac
+shift
+[ "$db" = "$dbavoid" ] && unset dbavoid
+
+for name in $@; do
+	args="$args -o -name *$name*"
+done
+
+find $db ${dbavoid:+-path $dbavoid -prune} ${args:-${dbavoid:+-o}} \
+	-type f -print ${1:+-quit}
+exit 0

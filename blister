@@ -1,0 +1,65 @@
+#!/bin/sh
+# blist: play files in mplayer from a file.
+
+# Play music using mplayer.
+player="mplayer
+-novideo"
+
+# Set IFS to new line so that songs with a space in them
+# do not get broken into multiple songs
+IFS="
+"
+
+# Get the options
+while getopts ":b:rs" opt ; do
+	case "$opt" in
+		b)
+			startpos="$OPTARG"
+			;;
+		r)
+			loop="-loop${IFS}0"
+			;;
+		s)
+			shuffle="-shuffle"
+			;;
+		\?)
+			echo "invalid option: -$OPTARG"
+			exit 1
+			;;
+	esac
+done
+shift $(($OPTIND - 1))
+
+# If the list is empty, there is no point doing anything
+[ -z "$1" ] && exit 0
+if [ -z $startpos ] ; then
+	$player $shuffle $loop $1
+else
+	# Check if the start position is valid
+	if [ $startpos -gt $(echo "$1" | wc -l) ] ; then
+		echo "$startpos is larger then the length of the list"
+		exit 0
+	fi
+	if [ -z "$shuffle" ] ; then
+		if [ -z "$loop" ] ; then
+			# Don't shuffle or loop, just $player the remaining
+			# files in the list.
+			$player $(echo "$1" | tail -n +$startpos)
+		else
+			# Loop only. Play the remaining part of the list,
+			# then the remaining part, then loop.
+			$player $loop $(echo "$1" | tail -n +$startpos) \
+				$(echo "$1" | head -n $startpos)
+		fi
+	else
+		# Play the file at the start position.
+		$player $(echo "$1" | sed "$(($startpos))q;d")
+		if [ -z "$loop" ] ; then
+			$player $shuffle $(echo "$1" | tail -n +$(($startpos + 1)))
+		else
+			$player $shuffle $loop $1
+		fi
+	fi
+fi
+
+exit 0

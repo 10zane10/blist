@@ -1,0 +1,92 @@
+#!/bin/sh
+
+_ammend () {
+	if [ -z $opts ]; then
+		opts="$1"
+	else
+		opts="$opts $1"
+	fi
+}
+
+_basename () {
+	sed 's/.*\///'
+}
+
+_match () {
+	possiblepos=1
+	echo "$2" | 
+	while read song; do
+		case "$song" in
+			*"$1"*)
+				echo "-b $possiblepos"
+				break
+		esac
+		possiblepos=$((possiblepos + 1))
+	done
+}
+
+# If no playlist is given, print out a list
+if [ -z $1 ]; then
+	blistdb -p | _basename
+	exit 0
+fi
+
+list=$(blistread $@)
+[ -z "$list" ] && exit 0
+cutlist=$(echo "$list" | _basename)
+prettylist=$(echo "$cutlist" | nl)
+
+echo "$prettylist"
+while printf "${opts:+$opts\n}(h for help): "; do
+	read -r command
+	case "$command" in 
+		h)
+			echo
+			echo 'h: display this menu'
+			echo 'p: print out the list'
+			echo 'P: print the list inside your pager'
+			echo 'r: repeat the playlist (forever)'
+			echo 's: shuffle the playlist'
+			echo 'q: quit'
+			echo 'enter: play from begining'
+			echo 'number: start at song number'
+			echo 'substring: start at song matching substring'
+			echo
+			;;
+		p)
+			echo "$prettylist"
+			;;
+		P)
+			echo "$prettylist" | ${PAGER:-less}
+			;;
+		r)
+			if [ -z $loop ]; then
+				loop=-r
+				_ammend repeat
+			fi
+			;;
+		s)
+			if [ -z $shuffle ]; then
+				shuflle=-s
+				_ammend shuffle
+			fi
+			;;
+		q)
+			exit 0
+			;;
+		0|1|"")
+			break
+			;;
+		*)
+			if [ "$command" -eq "$command" ]; then
+				startpos="-b $command"
+				break
+			fi >/dev/null 2>&1
+			_startpos=$(match "$command" "$cutlist")
+			[ -z "$startpos" ] || break
+			;;
+	esac
+done
+blister $loop $shuflle $startpos "$list"
+
+exit 0
