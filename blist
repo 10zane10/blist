@@ -1,4 +1,5 @@
 #!/bin/sh
+# blist: Play a playlist in the playlist directory
 
 _ammend () {
 	if [ -z $opts ]; then
@@ -9,7 +10,7 @@ _ammend () {
 }
 
 _basename () {
-	sed 's/.*\///'
+	sed 's=.*/=='
 }
 
 _match () {

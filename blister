@@ -1,14 +1,15 @@
 #!/bin/sh
-# blist: play files in mplayer from a file.
-
-# Play music using mplayer.
-player="mplayer
--novideo"
+# blister: play a list of songs, starting at a certain position, while still
+# allowing for the playlist to be shuffled or repeated.
 
 # Set IFS to new line so that songs with a space in them
 # do not get broken into multiple songs
 IFS="
 "
+
+# Play music using mplayer (and disable video).
+player="mplayer
+-novideo"
 
 # Get the options
 while getopts ":b:rs" opt ; do
@@ -30,12 +31,14 @@ while getopts ":b:rs" opt ; do
 done
 shift $(($OPTIND - 1))
 
-# If the list is empty, there is no point doing anything
+# If the list of files is empty, give up. There is no point doing anything.
 [ -z "$1" ] && exit 0
+
 if [ -z $startpos ] ; then
+	# No start position provided, do everything normally.
 	$player $shuffle $loop $1
 else
-	# Check if the start position is valid
+	# Check if the start position is valid.
 	if [ $startpos -gt $(echo "$1" | wc -l) ] ; then
 		echo "$startpos is larger then the length of the list"
 		exit 0
