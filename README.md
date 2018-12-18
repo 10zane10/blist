@@ -26,9 +26,8 @@ $ cp config ~/.config/blist
 To run blist (without giving it a playlist) run `$ blist` in your terminal.
 
 This will print a list of songs in your ~/Music folder and will give you an
-interactive menu to play the songs. Once you search for the song you want to
-start at or press enter, it will run the songs in mplayer starting at the song
-you specified.
+interactive menu to play the songs. Once you search for a song you want to
+start at or press enter, it will run the songs in mplayer.
 
 ### The playlist and song directories
 
