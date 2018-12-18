@@ -41,10 +41,22 @@ playlist directory is typically ~/Music/playlists.
 
 ### Playlists
 
-A blist playlist is simply a file containing a list of the songs you want to play.
+A blist playlist is simply a file containing a list of the songs you want to
+play. The names do not have to be the complete /path/to/file nor do they even
+need to be the complete file name. 
 
-Assuming the following is in a file named 'playlist' located somewhere in the
-playlist directory...
+If music direcotry contains files:
+
+```
+all-star.mp3
+bohemian-rhapsody.flac
+instanbul.wav
+fat-rat-unity.wav
+other-song.mp3
+```
+
+And there is a file named 'playlist' located somewhere in the playlist
+directory:
 
 ```
 all-star.mp3
@@ -52,12 +64,8 @@ fat-rat-unity.wav
 bohemian-rhaps
 ```
 
-`$ blist playlist` will play all-star.mp3, fat-rat-unity.wav, and
+Then `$ blist playlist` will play all-star.mp3, fat-rat-unity.wav, and
 bohemian-rhapsody.flac (assuming you have these files in the song directory).
 
-You do not need to be in the same directory as the playlist to use the
-playlist!
-
-The names do not have to be the complete /path/to/file nor do they even need to
-be the complete file name. In fact, including the path may cause the file to be
-skipped in some cases.
+Note: You do not need to be in the same directory as the playlist to use the
+playlist.
