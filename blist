@@ -34,9 +34,8 @@ fi
 [ -z "$list" ] && exit 0
 
 cutlist=$(echo "$list" | _basename)
-prettylist=$(echo "$cutlist" | nl)
 
-echo "$prettylist"
+echo "$cutlist"
 while printf "${opts:+$opts\n}(h for help): "; do
 	read -r command
 	case "$command" in 
@@ -49,15 +48,14 @@ while printf "${opts:+$opts\n}(h for help): "; do
 			echo 's: shuffle the playlist'
 			echo 'q: quit'
 			echo 'enter: play from begining'
-			echo 'number: start at song number'
 			echo 'substring: start at song matching substring'
 			echo
 			;;
 		p)
-			echo "$prettylist"
+			echo "$cutlist"
 			;;
 		P)
-			echo "$prettylist" | ${PAGER:-less}
+			echo "$cutlist" | ${PAGER:-less}
 			;;
 		r)
 			if [ -z $loop ]; then
@@ -74,15 +72,11 @@ while printf "${opts:+$opts\n}(h for help): "; do
 		q)
 			exit 0
 			;;
-		0|1|"")
+		"")
 			break
 			;;
 		*)
-			if [ "$command" -eq "$command" ]; then
-				startpos="-b $command"
-				break
-			fi >/dev/null 2>&1
-			_startpos=$(match "$command" "$cutlist")
+			startpos=$(_match "$command" "$cutlist")
 			[ -z "$startpos" ] || break
 			;;
 	esac
