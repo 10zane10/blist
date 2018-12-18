@@ -43,7 +43,7 @@ playlist directory is typically ~/Music/playlists.
 
 blist playlist is simply a file containing a list of the songs you want to play.
 
-Assuming the following is in the file `playlist` located somewhere in the
+Assuming the following is in the file playlist located somewhere in the
 playlist directory...
 
 ```
@@ -53,7 +53,7 @@ bohemian-rhaps
 ```
 
 `$ blist playlist` will play all-star.mp3 fat-rat-unity.wav and
-bohemian-rhapsody.flac (assuming you have these files in the song directory
+bohemian-rhapsody.flac (assuming you have these files in the song directory).
 
 The names do not have to be the complete /path/to/file nor do they even need to
 be the complete file name. In fact, including the path may cause the file to be
