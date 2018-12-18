@@ -65,7 +65,7 @@ bohemian-rhaps
 ```
 
 Then `$ blist playlist` will play all-star.mp3, fat-rat-unity.wav, and
-bohemian-rhapsody.flac (assuming you have these files in the song directory).
+bohemian-rhapsody.flac.
 
 Note: You do not need to be in the same directory as the playlist to use the
 playlist.
