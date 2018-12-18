@@ -43,7 +43,7 @@ playlist directory is typically ~/Music/playlists.
 
 A blist playlist is simply a file containing a list of the songs you want to play.
 
-Assuming the following is in the file playlist located somewhere in the
+Assuming the following is in a file named 'playlist' located somewhere in the
 playlist directory...
 
 ```
