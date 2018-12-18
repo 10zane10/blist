@@ -26,14 +26,13 @@ _match () {
 	done
 }
 
-# If no playlist is given, print out a list
 if [ -z $1 ]; then
-	blistdb -p | _basename
-	exit 0
+	list=$(blistdb -m)
+else
+	list=$(blistread $@)
 fi
-
-list=$(blistread $@)
 [ -z "$list" ] && exit 0
+
 cutlist=$(echo "$list" | _basename)
 prettylist=$(echo "$cutlist" | nl)
 
