@@ -7,10 +7,17 @@ command line in mplayer. Blist is expected to never excede 500 lines of code.
 
 1. Install mplayer
 2. Copy files into a directory in $PATH
+
+```sh
     $ sudo cp blist* /usr/local/bin
+```
+
 3. Copy config to ~/.config/blist
+
+```sh
     $ mkdir -p ~/.config/blist
 		$ cp config ~/.config/blist
+```
 
 ## Usage
 
