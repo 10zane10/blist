@@ -1,7 +1,7 @@
 # blist
 
 A simple shell script to conveniently play music and playlists from the
-command line in mplayer. Blist is expected to never excede 500 lines of code.
+command line in mplayer. Blist is expected to never exceed 500 lines of code.
 
 ## Installation
 
@@ -32,7 +32,7 @@ start at, it will open the songs in mplayer starting at that song.
 ### The playlist and song directories
 
 The playlist and song directories are where blist searches for songs and
-playlist respectedly. These are set by PLAYLISTDIR and MUSICDIR (found in
+playlist respectively. These are set by PLAYLISTDIR and MUSICDIR (found in
 ~/.config/blist/config). The music directory is typically ~/Music while the
 playlist directory is typically ~/Music/playlists.  
 
@@ -52,7 +52,7 @@ fat-rat-unity.wav
 bohemian-rhaps
 ```
 
-`$ blist playlist` will play all-star.mp3 fat-rat-unity.wav and
+`$ blist playlist` will play all-star.mp3, fat-rat-unity.wav, and
 bohemian-rhapsody.flac (assuming you have these files in the song directory).
 
 The names do not have to be the complete /path/to/file nor do they even need to
