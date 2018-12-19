@@ -1,7 +1,7 @@
 # blist
 
 A simple shell script to conveniently play music and playlists from the command
-line (with mplayer). Blist is never expected to exceed 500 lines of code.
+line (with mplayer).
 
 ## Installation
 
@@ -45,7 +45,7 @@ A blist playlist is simply a file containing a list of the songs you want to
 play. The names do not have to be the complete /path/to/file nor do they even
 need to be the complete file name. 
 
-If music direcotry contains files:
+If music directory contains files:
 
 ```
 all-star.mp3
