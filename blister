@@ -36,7 +36,7 @@ shift $(($OPTIND - 1))
 
 if [ -z $startpos ] ; then
 	# No start position provided, do everything normally.
-	$player $shuffle $loop $1
+	exec $player $shuffle $loop $1
 else
 	# Check if the start position is valid.
 	if [ $startpos -gt $(echo "$1" | wc -l) ] ; then
@@ -47,22 +47,23 @@ else
 		if [ -z "$loop" ] ; then
 			# Don't shuffle or loop, just $player the remaining
 			# files in the list.
-			$player $(echo "$1" | tail -n +$startpos)
+			exec $player $(echo "$1" | tail -n +$startpos)
 		else
 			# Loop only. Play the remaining part of the list,
 			# then the remaining part, then loop.
-			$player $loop $(echo "$1" | tail -n +$startpos) \
+			exec $player $loop $(echo "$1" | tail -n +$startpos) \
 				$(echo "$1" | head -n $startpos)
 		fi
 	else
 		# Play the file at the start position.
 		$player $(echo "$1" | sed "$(($startpos))q;d")
 		if [ -z "$loop" ] ; then
-			$player $shuffle $(echo "$1" | tail -n +$(($startpos + 1)))
+			exec $player $shuffle $(echo "$1" | tail -n +$(($startpos + 1)))
 		else
-			$player $shuffle $loop $1
+			exec $player $shuffle $loop $1
 		fi
 	fi
 fi
-
-exit 0
+echo ===================
+echo well shit
+echo ==================
