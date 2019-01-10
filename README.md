@@ -9,7 +9,7 @@ line (with mplayer).
 2. Copy files into a directory in $PATH
 
 ```sh
-$ sudo cp blist* /usr/local/bin
+# cp blist* /usr/local/bin
 ```
 
 3. Copy config to ~/.config/blist
