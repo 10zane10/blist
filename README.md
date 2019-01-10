@@ -8,13 +8,13 @@ line (with mplayer).
 1. Install mplayer
 2. Copy files into a directory in $PATH
 
-```sh
+```
 # cp blist* /usr/local/bin
 ```
 
 3. Copy config to ~/.config/blist
 
-```sh
+```
 $ mkdir -p ~/.config/blist
 $ cp config ~/.config/blist
 ```
